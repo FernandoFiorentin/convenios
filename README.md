@@ -5,7 +5,9 @@ Dupla: Carlos e Fernando<br>
 
 Cadastros<br>
 - Empresas (nome fantasia, CNPJ e razão social).<br>
+
 - Funcionários (nome, e-mail, telefone e empresa).<br>
+
 - Convênios (nome e empresas).<br>
 
 Relatório de funcionários por ordem alfabética (fantasia):<br>
