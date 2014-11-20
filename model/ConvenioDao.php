@@ -21,7 +21,7 @@ class ConvenioDao extends Dao{
         
     }
     
-    public function listarTodos(Convenio $convenio){
+    public function listarTodos(){
         
     }
     
