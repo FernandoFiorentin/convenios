@@ -1,5 +1,4 @@
 <?php
-include_once 'Dao.php';
 
 class ConvenioDao extends Dao{
     public function __construct() {

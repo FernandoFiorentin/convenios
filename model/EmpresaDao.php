@@ -1,7 +1,5 @@
 <?php
 
-include_once './Dao.php';
-include_once './Empresa.php';
 
 class EmpresaDao extends Dao {
 
