@@ -8,7 +8,9 @@ Cadastros<br>
 
 - Funcionários (nome, e-mail, telefone e empresa).<br>
 
-- Convênios (nome e empresas).<br>
+- Convênios (nome).<br>
+
+- Funcionario_convenio(idfuncionario, idempresa)<br>
 
 Relatório de funcionários por ordem alfabética (fantasia):<br>
 - Mostrar nome, e-mail, telefone e clube de todos os funcionários com possibilidade de filtro (busca) pelos 4 campos;<br>
