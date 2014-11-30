@@ -29,13 +29,20 @@
         <!-- Static navbar -->
         <?php
         include_once 'menu.php';
+        include_once '../controller/ControllerEpresa.php';
+
+        $acao = 'inserir';
+        if (isset($_GET['acao'])) {
+            $acao = $_GET['acao'];
+        }
         ?>
 
         <div class="container ">
             <div class="panel panel-default ">
                 <div class="panel-body">
-                    <form role="form" class="col-md-4">
+                    <form role="form" class="col-md-4" action="../controller/preControllerEmpresa.php" method="post">
                         <div class="form-group">
+                            <input type="hidden" name="acao" value="<?php echo $acao; ?>">
                             <label for="id">Id</label>
                             <input type="text" name="id" id="id" class="form-control"  >
                         </div>
@@ -51,10 +58,41 @@
                             <label for="razao">Razão Social</label>
                             <input type="text" name="razao" id="razao" class="form-control"  placeholder="Razão Social">
                         </div>
-                        <button type="button" class="btn btn-default" onclick="window.location.href='FrmEmpresa.php?menu=empresa'">Novo</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmEmpresa.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
                         <button type="submit" class="btn btn-default">Excluir</button>
                     </form>  
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Lista de empresas</div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Fantasia</th>
+                            <th>CNPJ</th>
+                            <th>Razao Social</th>
+                            <th>Editar</th> 
+                        </tr>
+                        <?php
+                        $ctrlEmpresa = new ControllerEmpresa();
+                        $empresas = $ctrlEmpresa->listarTodos();
+                        foreach ($empresas as $empresa) {
+                            ?>
+                            <tr>
+                                <td><?php echo $empresa->getId();?></td>
+                                <td><?php echo $empresa->getFantasia();?></td>
+                                <td><?php echo $empresa->getCnpj();?></td>
+                                <td><?php echo $empresa->getRazaoSocial();?></td>
+                                <td><a href="../controller/preControllerEmpresa.php?acao=editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a></td>
+                            </tr>    
+                            <?php
+                        }
+                        ?>
+
+                    </table>
                 </div>
             </div>
 

@@ -37,7 +37,7 @@
                     <form role="form" class="col-md-4">
                         <div class="form-group">
                             <label for="id">Id</label>
-                            <input type="text" name="id" id="id" class="form-control"  >
+                            <input type="text" name="id" id="id" class="form-control" placeholder="ID" >
                         </div>
                         <div class="form-group">
                             <label for="nome">Nome</label>
@@ -57,7 +57,7 @@
                                 <option value='0'>Teste</option>
                             </select>                            
                         </div>
-                        <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmFuncionario.php?menu=funcionario'">Novo</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmFuncionario.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
                         <button type="submit" class="btn btn-default">Excluir</button>
                     </form>  

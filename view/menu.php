@@ -1,17 +1,18 @@
 <?php
-if (isset($_GET['menu'])) {
 
-    $menuAtivo = null;
-    $menuAtivo['empresa'] = '';
-    $menuAtivo['funcnionario'] = '';
-    $menuAtivo['convenio'] = '';
-    if ($_GET['menu'] == 'empresa') {
-        $menuAtivo['empresa'] = 'active';
-    } elseif ($_GET['menu'] == 'funcionario') {
-        $menuAtivo['funcionario'] = 'active';
-    } elseif ($_GET['menu'] == 'convenio') {
-        $menuAtivo['convenio'] = 'active';
-    }
+$arquivoAtual = $_SERVER['PHP_SELF'];
+
+$menuAtivo = null;
+$menuAtivo['empresa'] = '';
+$menuAtivo['funcnionario'] = '';
+$menuAtivo['convenio'] = '';
+
+if ($arquivoAtual == '/convenios/view/FrmEmpresa.php') {
+    $menuAtivo['empresa'] = 'active';
+} elseif ($arquivoAtual == '/convenios/view/FrmFuncionario.php') {
+    $menuAtivo['funcionario'] = 'active';
+} elseif ($arquivoAtual == '/convenios/view/FrmConvenio.php') {
+    $menuAtivo['convenio'] = 'active';
 }
 ?>
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -27,9 +28,9 @@ if (isset($_GET['menu'])) {
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="<?php echo $menuAtivo['empresa']?>"><a href="FrmEmpresa.php?menu=empresa">Empresas</a></li>
-                <li class="<?php echo $menuAtivo['funcionario']?>"><a href="FrmFuncionario.php?menu=funcionario">Funcionarios</a></li>
-                <li class="<?php echo $menuAtivo['convenio']?>"><a href="FrmConvenio.php?menu=convenio">Convenios</a></li>                
+                <li class="<?php echo $menuAtivo['empresa'] ?>"><a href="FrmEmpresa.php">Empresas</a></li>
+                <li class="<?php echo $menuAtivo['funcionario'] ?>"><a href="FrmFuncionario.php">Funcionarios</a></li>
+                <li class="<?php echo $menuAtivo['convenio'] ?>"><a href="FrmConvenio.php">Convenios</a></li>                
             </ul>            
         </div><!--/.nav-collapse -->
     </div>

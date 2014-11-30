@@ -37,14 +37,14 @@
                     <form role="form" class="col-md-4">
                         <div class="form-group">
                             <label for="id">Id</label>
-                            <input type="text" name="id" id="id" class="form-control"  >
+                            <input type="text" name="id" id="id" class="form-control" placeholder="ID"  >
                         </div>
                         <div class="form-group">
                             <label for="nome">Nome</label>
                             <input type="text" name="nome" id="nome" class="form-control"  placeholder="CNPJ">
                         </div>
                         
-                        <button type="button" class="btn btn-default" onclick="window.location.href='FrmEmpresa.php?menu=empresa'">Novo</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href='FrmEmpresa.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
                         <button type="submit" class="btn btn-default">Excluir</button>
                     </form>  
