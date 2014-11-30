@@ -29,6 +29,13 @@
         <!-- Static navbar -->
         <?php
         include_once 'menu.php';
+
+        include_once '../controller/ControllerConvenio.php';
+
+        $acao = 'inserir';
+        if (isset($_GET['acao'])) {
+            $acao = $_GET['acao'];
+        }
         ?>
 
         <div class="container">
@@ -36,6 +43,7 @@
                 <div class="panel-body">
                     <form role="form" class="col-md-4">
                         <div class="form-group">
+                            <input type="hidden" name="acao" value="<?php echo $acao; ?>">
                             <label for="id">Id</label>
                             <input type="text" name="id" id="id" class="form-control" placeholder="ID"  >
                         </div>
@@ -43,13 +51,44 @@
                             <label for="nome">Nome</label>
                             <input type="text" name="nome" id="nome" class="form-control"  placeholder="CNPJ">
                         </div>
-                        
-                        <button type="button" class="btn btn-default" onclick="window.location.href='FrmEmpresa.php'">Novo</button>
+
+                        <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmEmpresa.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
                         <button type="submit" class="btn btn-default">Excluir</button>
                     </form>  
                 </div>
-            </div>       
+            </div> 
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Lista de empresas</div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Fantasia</th>
+                            <th>CNPJ</th>
+                            <th>Razao Social</th>
+                            <th>Editar</th> 
+                        </tr>
+                        <?php
+                        $ctrlEmpresa = new ControllerEmpresa();
+                        $funcionarios = $ctrlEmpresa->listarTodos();
+                        foreach ($funcionarios as $funcionario) {
+                            ?>
+                            <tr>
+                                <td><?php echo $funcionario->getId(); ?></td>
+                                <td><?php echo $funcionario->getFantasia(); ?></td>
+                                <td><?php echo $funcionario->getCnpj(); ?></td>
+                                <td><?php echo $funcionario->getRazaoSocial(); ?></td>
+                                <td><a href="../controller/preControllerEmpresa.php?acao=editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a></td>
+                            </tr>    
+                            <?php
+                        }
+                        ?>
+
+                    </table>
+                </div>
+            </div>
         </div> <!-- /container -->
 
         <script src="../js/jquery.min.js"></script>

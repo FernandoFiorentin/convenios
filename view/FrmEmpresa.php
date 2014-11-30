@@ -31,9 +31,17 @@
         include_once 'menu.php';
         include_once '../controller/ControllerEpresa.php';
 
+        $ctrlEmpresa = new ControllerEmpresa();
+
         $acao = 'inserir';
+        $empresa = new Empresa();
         if (isset($_GET['acao'])) {
             $acao = $_GET['acao'];
+
+            if ($acao == 'editar') {
+                $idEmpresa = $_GET['id'];
+                $empresa = $ctrlEmpresa->buscarPorId($idEmpresa);
+            }
         }
         ?>
 
@@ -43,24 +51,24 @@
                     <form role="form" class="col-md-4" action="../controller/preControllerEmpresa.php" method="post">
                         <div class="form-group">
                             <input type="hidden" name="acao" value="<?php echo $acao; ?>">
-                            <label for="id">Id</label>
-                            <input type="text" name="id" id="id" class="form-control"  >
+                            <label for="id">Id</label>                            
+                            <input type="text" name="id" id="id" class="form-control" value="<?php echo $empresa->getId() ?>" >
                         </div>
                         <div class="form-group">
                             <label for="fantasia">Nome Fantasia</label>
-                            <input type="text" name="fantasia" id="fantasia" class="form-control"  placeholder="Nome Fantasia">
+                            <input type="text" name="fantasia" id="fantasia" class="form-control" value="<?php echo $empresa->getFantasia() ?>"  placeholder="Nome Fantasia" >
                         </div>
                         <div class="form-group">
                             <label for="cnpj">CNPJ</label>
-                            <input type="text" name="cnpj" id="cnpj" class="form-control"  placeholder="CNPJ">
+                            <input type="text" name="cnpj" id="cnpj" class="form-control" value="<?php echo $empresa->getCnpj() ?>"  placeholder="CNPJ">
                         </div>
                         <div class="form-group">
                             <label for="razao">Razão Social</label>
-                            <input type="text" name="razao" id="razao" class="form-control"  placeholder="Razão Social">
+                            <input type="text" name="razao" id="razao" class="form-control" value="<?php echo $empresa->getRazaoSocial() ?>"  placeholder="Razão Social">
                         </div>
                         <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmEmpresa.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
-                        <button type="submit" class="btn btn-default">Excluir</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = '../controller/preControllerEmpresa.php?acao=excluir&id=<?php echo $empresa->getId()?>'">Excluir</button>
                     </form>  
                 </div>
             </div>
@@ -77,16 +85,15 @@
                             <th>Editar</th> 
                         </tr>
                         <?php
-                        $ctrlEmpresa = new ControllerEmpresa();
                         $empresas = $ctrlEmpresa->listarTodos();
                         foreach ($empresas as $empresa) {
                             ?>
                             <tr>
-                                <td><?php echo $empresa->getId();?></td>
-                                <td><?php echo $empresa->getFantasia();?></td>
-                                <td><?php echo $empresa->getCnpj();?></td>
-                                <td><?php echo $empresa->getRazaoSocial();?></td>
-                                <td><a href="../controller/preControllerEmpresa.php?acao=editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a></td>
+                                <td><?php echo $empresa->getId(); ?></td>
+                                <td><?php echo $empresa->getFantasia(); ?></td>
+                                <td><?php echo $empresa->getCnpj(); ?></td>
+                                <td><?php echo $empresa->getRazaoSocial(); ?></td>
+                                <td><a href="FrmEmpresa.php?acao=editar&id=<?php echo $empresa->getId(); ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a></td>
                             </tr>    
                             <?php
                         }

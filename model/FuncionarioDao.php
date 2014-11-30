@@ -53,7 +53,7 @@ class FuncionarioDao extends Dao {
             $sql = 'update funcionario set
                         nome = :nome,
                         email = :email,
-                        telefone = :telefone
+                        telefone = :telefone,
                         idempresa = :idempresa
                         where idfuncionario = :idfuncionario';
 
@@ -63,11 +63,15 @@ class FuncionarioDao extends Dao {
             $stmt->bindValue(':telefone', $funcionario->getTelefone());
             $stmt->bindValue(':idempresa', $funcionario->getIdEmpresa());
             $stmt->bindValue(':idfuncionario', $funcionario->getId());
+            echo '<pre>';
+            print_r($sql);
+            echo '</pre>';
             $stmt->execute();
             $this->con->commit();
             return true;
         } catch (Exception $ex) {
             $this->con->rollback();
+            
             throw new Exception('Erro ao editar de funcionario: ' . $ex->getMessage());
         }
     }
