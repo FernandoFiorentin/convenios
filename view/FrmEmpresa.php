@@ -30,6 +30,8 @@
         <?php
         include_once 'menu.php';
         include_once '../controller/ControllerEmpresa.php';
+        include_once '../controller/ControllerConvenio.php';
+        include_once '../controller/ControllerEmpresaConvenio.php';
 
         $ctrlEmpresa = new ControllerEmpresa();
 
@@ -47,7 +49,9 @@
 
         <div class="container ">
             <div class="panel panel-default ">
+                <div class="panel-heading">Formulario</div>
                 <div class="panel-body">
+                    <!-- Formulario Empresa -->
                     <form role="form" class="col-md-4" action="../controller/preControllerEmpresa.php" method="post">
                         <div class="form-group">
                             <input type="hidden" name="acao" value="<?php echo $acao; ?>">
@@ -68,13 +72,72 @@
                         </div>
                         <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmEmpresa.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
-                        <button type="button" class="btn btn-default" onclick="window.location.href = '../controller/preControllerEmpresa.php?acao=excluir&id=<?php echo $empresa->getId()?>'">Excluir</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = '../controller/preControllerEmpresa.php?acao=excluir&id=<?php echo $empresa->getId() ?>'">Excluir</button>
                     </form>  
+                    <!-- Fim Formulario Empresa -->
+
+                    <?php
+                    if ($acao == 'editar') {
+                        ?>
+                        <!-- convenios da empresa -->
+                        <div class="container col-md-8">
+                            <div class="panel panel-default ">
+                                <div class="panel-heading">Convenios desta Empresa</div>
+                                <div class="panel-body">
+                                    <form method="post" action="../controller/preControllerEmpresaConvenio.php">
+                                        <input type="hidden" name="acao" value="inserir">
+                                        <input type="hidden" name="idempresa" value="<?php echo $empresa->getId(); ?>">
+                                        <select class="form-control" name="idconvenio">
+                                            <option value="-1"></option>
+                                            <?php
+                                            $ctrlConvenio = new ControllerConvenio();
+                                            $convenios = $ctrlConvenio->listarTodos();
+                                            foreach ($convenios as $convenio) {
+                                                ?>
+                                                <option value="<?php echo $convenio->getId(); ?>"> <?php echo $convenio->getNome() ?> </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        <input type="submit" class="btn btn-default" value="Adicionar Convenio">
+                                    </form>
+                                    <hr>
+                                    <table class="table table-bordered table-striped">
+                                        <tr>
+                                            <th>Id Convenio/Empresa</th>
+                                            <th>Convenio</th>
+                                            <th>Remover</th>
+                                        </tr>
+                                        <?php
+                                        $ctrlEmpConv = new ControllerEmpresaConvenio();
+                                        $empresaConvenios = $ctrlEmpConv->buscarPorIdEmpresa($empresa->getId());
+                                        //$ctrlConvenio = new ControllerConvenio();
+                                        foreach ($empresaConvenios as $empresaConvenio) {
+                                            $convenio = $ctrlConvenio->buscarPorId($empresaConvenio->getIdConvenio());
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $empresaConvenio->getId(); ?></td>
+                                                <td><?php echo $convenio->getNome(); ?></td>
+                                                <td><a href="../controller/preControllerEmpresaConvenio.php?acao=excluir&id=<?php echo $empresaConvenio->getId();?>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remover</a></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fim convenios da empresa -->
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
 
+
+
             <div class="panel panel-default">
-                <div class="panel-heading">Lista de empresas</div>
+                <div class="panel-heading">Lista de Empresas</div>
                 <div class="panel-body">
                     <table class="table table-bordered table-striped">
                         <tr>

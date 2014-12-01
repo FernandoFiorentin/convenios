@@ -49,6 +49,7 @@
 
         <div class="container">
             <div class="panel panel-default ">
+                <div class="panel-heading">Formulario</div>
                 <div class="panel-body">
                     <form role="form" class="col-md-4" method="post" action="../controller/preControllerFuncionario.php">
                         <div class="form-group">
@@ -95,7 +96,7 @@
             </div>    
 
             <div class="panel panel-default">
-                <div class="panel-heading">Lista de empresas</div>
+                <div class="panel-heading">Lista de Funcionarios</div>
                 <div class="panel-body">
                     <table class="table table-bordered table-striped">
                         <tr>
@@ -104,6 +105,7 @@
                             <th>Email</th>
                             <th>Telefone</th>
                             <th>Empresa</th> 
+                            <th>Editar</th>
                         </tr>
                         <?php
                         

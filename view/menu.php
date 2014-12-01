@@ -13,6 +13,8 @@ if ($arquivoAtual == '/convenios/view/FrmEmpresa.php') {
     $menuAtivo['funcionario'] = 'active';
 } elseif ($arquivoAtual == '/convenios/view/FrmConvenio.php') {
     $menuAtivo['convenio'] = 'active';
+}elseif ($arquivoAtual == '/convenios/view/Relatorios.php') {
+    $menuAtivo['relatorios'] = 'active';
 }
 ?>
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -31,6 +33,7 @@ if ($arquivoAtual == '/convenios/view/FrmEmpresa.php') {
                 <li class="<?php echo $menuAtivo['empresa'] ?>"><a href="FrmEmpresa.php">Empresas</a></li>
                 <li class="<?php echo $menuAtivo['funcionario'] ?>"><a href="FrmFuncionario.php">Funcionarios</a></li>
                 <li class="<?php echo $menuAtivo['convenio'] ?>"><a href="FrmConvenio.php">Convenios</a></li>                
+                <li class="<?php echo $menuAtivo['relatorios'] ?>"><a href="Relatorios.php">Relatorios</a></li>                
             </ul>            
         </div><!--/.nav-collapse -->
     </div>

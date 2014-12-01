@@ -40,19 +40,22 @@ class EmpresaConvenioDao extends Dao {
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':idempresa', $idEmpresa);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $empresaConvenio = new EmpresaConvenio();
-            $empresaConvenio->setId($row['id_empresa_convenio']);
-            $empresaConvenio->setIdEmpresa($row['idempresa']);
-            $empresaConvenio->setIdConvenio($row['idconvenio']);
+            $convenios = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-            return $empresaConvenio;
+                $empresaConvenio = new EmpresaConvenio();
+                $empresaConvenio->setId($row['id_empresa_convenio']);
+                $empresaConvenio->setIdEmpresa($row['idempresa']);
+                $empresaConvenio->setIdConvenio($row['idconvenio']);
+                $convenios[] = $empresaConvenio;
+            }
+            return $convenios;
         } catch (Exception $ex) {
             throw new Exception('erro ao buscar empresa_convenio ' . $ex->getMessage());
         }
     }
-    
+
     public function buscarPorIdConvenio($idConvenio) {
         try {
             $sql = 'select id_empresa_convenio, idconvenio, idempresa
@@ -64,17 +67,21 @@ class EmpresaConvenioDao extends Dao {
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $empresaConvenio = new EmpresaConvenio();
-            $empresaConvenio->setId($row['id_empresa_convenio']);
-            $empresaConvenio->setIdEmpresa($row['idempresa']);
-            $empresaConvenio->setIdConvenio($row['idconvenio']);
+            $convenios = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-            return $empresaConvenio;
+                $empresaConvenio = new EmpresaConvenio();
+                $empresaConvenio->setId($row['id_empresa_convenio']);
+                $empresaConvenio->setIdEmpresa($row['idempresa']);
+                $empresaConvenio->setIdConvenio($row['idconvenio']);
+                $convenios[] = $empresaConvenio;
+            }
+            return $convenios;
         } catch (Exception $ex) {
             throw new Exception('erro ao buscar empresa_convenio ' . $ex->getMessage());
         }
     }
-    
+
     public function deletar($id) {
         $this->con->beginTransaction();
         try {
@@ -123,7 +130,7 @@ class EmpresaConvenioDao extends Dao {
                                 :idempresa,
                                 :idconvenio)';
 
-            $stmt = $this->con->prepare($sql);            
+            $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':idempresa', $empresaConvenio->getIdEmpresa());
             $stmt->bindValue(':idconvenio', $empresaConvenio->getIdConvenio());
             $stmt->execute();
@@ -138,8 +145,8 @@ class EmpresaConvenioDao extends Dao {
 
     public function listarTodos() {
         try {
-            $sql = 'select idconvenio, nome, idempresa
-                        from convenio order by idconvenio';
+            $sql = 'select id_empresa_convenio, idconvenio, idempresa
+                        from empresa_convenio order by id_empresa_convenio';
 
             $stmt = $this->con->prepare($sql);
 
@@ -147,11 +154,13 @@ class EmpresaConvenioDao extends Dao {
 
             $convenios = array();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $convenio = new Convenio();
-                $convenio->setId($row['idempresa']);
-                $convenio->setNome($row['nome']);
-                $convenio->setIdEmpresa($row['idempresa']);
-                $convenios[] = $convenio;
+
+                $empresaConvenio = new EmpresaConvenio();
+                $empresaConvenio->setId($row['id_empresa_convenio']);
+                $empresaConvenio->setIdEmpresa($row['idempresa']);
+                $empresaConvenio->setIdConvenio($row['idconvenio']);
+
+                $convenios[] = $empresaConvenio;
             }
 
             return $convenios;

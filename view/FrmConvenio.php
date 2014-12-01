@@ -47,6 +47,7 @@
 
         <div class="container">
             <div class="panel panel-default ">
+                <div class="panel-heading">Formulario</div>
                 <div class="panel-body">
                     <form role="form" class="col-md-4" method="post" action="../controller/preControllerConvenio.php">
                         <div class="form-group">
@@ -67,7 +68,7 @@
             </div> 
 
             <div class="panel panel-default">
-                <div class="panel-heading">Lista de empresas</div>
+                <div class="panel-heading">Lista de Convenios</div>
                 <div class="panel-body">
                     <table class="table table-bordered table-striped">
                         <tr>
