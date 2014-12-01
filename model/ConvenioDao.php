@@ -11,8 +11,8 @@ class ConvenioDao extends Dao {
 
     public function buscarPorId($id) {
         try {
-            $sql = 'select idconvenio, nome, idempresa
-                        from convenio 
+            $sql = 'select idconvenio, nome
+                        from convenios 
                         where idconvenio = :idconvenio';
 
             $stmt = $this->con->prepare($sql);
@@ -21,9 +21,8 @@ class ConvenioDao extends Dao {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $convenio = new Convenio();
-            $convenio->setId($row['idempresa']);
+            $convenio->setId($row['idconvenio']);
             $convenio->setNome($row['nome']);
-            $convenio->setIdEmpresa($row['idempresa']);
 
             return $convenio;
         } catch (Exception $ex) {
@@ -34,7 +33,7 @@ class ConvenioDao extends Dao {
     public function deletar($id) {
         $this->con->beginTransaction();
         try {
-            $sql = 'delete from convenio where idconvenio = :idconvenio';
+            $sql = 'delete from convenios where idconvenio = :idconvenio';
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':idconvenio', $id);
@@ -51,15 +50,13 @@ class ConvenioDao extends Dao {
     public function editar(Convenio $convenio) {
         $this->con->beginTransaction();
         try {
-            $sql = 'update convenio set
-                        nome = :nome,
-                        idempresa = :idempresa
+            $sql = 'update convenios set
+                        nome = :nome                        
                         where idconvenio = :idconvenio';
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':nome', $convenio->getNome());
-            $stmt->bindValue(':idempresa', $convenio->getIdEmpresa());
-            $stmt->bindValue(':idconvenio', $convenio->getid());
+            $stmt->bindValue(':idconvenio', $convenio->getId());
             $stmt->execute();
             $this->con->commit();
             return true;
@@ -72,16 +69,11 @@ class ConvenioDao extends Dao {
     public function inserir(Convenio $convenio) {
         $this->con->beginTransaction();
         try {
-            $sql = 'insert into convenio(
-                                nome,
-                                idempresa)
-                                values(
-                                :nome,
-                                :idempresa)';
+            $sql = 'insert into convenios(nome)
+                                  values(:nome)';
 
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':nome', $convenio->getNome());
-            $stmt->bindValue(':idempresa', $convenio->getIdEmpresa());
             $stmt->execute();
 
             $this->con->commit();
@@ -94,8 +86,8 @@ class ConvenioDao extends Dao {
 
     public function listarTodos() {
         try {
-            $sql = 'select idconvenio, nome, idempresa
-                        from convenio order by idconvenio';
+            $sql = 'select idconvenio, nome
+                        from convenios order by idconvenio';
 
             $stmt = $this->con->prepare($sql);
 
@@ -104,9 +96,8 @@ class ConvenioDao extends Dao {
             $convenios = array();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $convenio = new Convenio();
-                $convenio->setId($row['idempresa']);
+                $convenio->setId($row['idconvenio']);
                 $convenio->setNome($row['nome']);
-                $convenio->setIdEmpresa($row['idempresa']);
                 $convenios[] = $convenio;
             }
 

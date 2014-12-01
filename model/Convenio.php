@@ -4,10 +4,8 @@ class Convenio {
 
     private $id;
     private $nome;
-    private $idEmpresa;
     
-
-    public function getid() {
+    public function getId() {
         return $this->id;
     }
 
@@ -21,14 +19,6 @@ class Convenio {
 
     public function setNome($nome) {
         $this->nome = $nome;
-    }
-
-    public function getIdEmpresa() {
-        return $this->idEmpresa;
-    }
-
-    public function setIdEmpresa($idEmpresa) {
-        $this->idEmpresa = $idEmpresa;
     }
 
 }

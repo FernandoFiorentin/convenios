@@ -31,7 +31,7 @@
         include_once 'menu.php';
 
         include_once '../controller/ControllerFuncionario.php';
-        include_once '../controller/ControllerEpresa.php';
+        include_once '../controller/ControllerEmpresa.php';
 
         $ctrlFuncionario = new ControllerFuncionario();
         

@@ -29,32 +29,39 @@
         <!-- Static navbar -->
         <?php
         include_once 'menu.php';
-
         include_once '../controller/ControllerConvenio.php';
 
+        $ctrlConvenio = new ControllerConvenio();
+        
         $acao = 'inserir';
+        $convenio = new Convenio();
         if (isset($_GET['acao'])) {
             $acao = $_GET['acao'];
+
+            if ($acao == 'editar') {
+                $idConvenio = $_GET['id'];
+                $convenio = $ctrlConvenio->buscarPorId($idConvenio);
+            }
         }
         ?>
 
         <div class="container">
             <div class="panel panel-default ">
                 <div class="panel-body">
-                    <form role="form" class="col-md-4">
+                    <form role="form" class="col-md-4" method="post" action="../controller/preControllerConvenio.php">
                         <div class="form-group">
                             <input type="hidden" name="acao" value="<?php echo $acao; ?>">
                             <label for="id">Id</label>
-                            <input type="text" name="id" id="id" class="form-control" placeholder="ID"  >
+                            <input type="text" name="id" id="id" class="form-control" value="<?php echo $convenio->getId()?>" placeholder="ID"  >
                         </div>
                         <div class="form-group">
                             <label for="nome">Nome</label>
-                            <input type="text" name="nome" id="nome" class="form-control"  placeholder="CNPJ">
+                            <input type="text" name="nome" id="nome" class="form-control" value="<?php echo $convenio->getNome()?>" placeholder="CNPJ">
                         </div>
 
-                        <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmEmpresa.php'">Novo</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmConvenio.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
-                        <button type="submit" class="btn btn-default">Excluir</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = '../controller/preControllerConvenio.php?acao=excluir&id=<?php echo $convenio->getId()?>'">Excluir</button>
                     </form>  
                 </div>
             </div> 
@@ -65,22 +72,18 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th>ID</th>
-                            <th>Fantasia</th>
-                            <th>CNPJ</th>
-                            <th>Razao Social</th>
+                            <th>Nome</th>                            
                             <th>Editar</th> 
                         </tr>
                         <?php
-                        $ctrlEmpresa = new ControllerEmpresa();
-                        $funcionarios = $ctrlEmpresa->listarTodos();
-                        foreach ($funcionarios as $funcionario) {
+                        
+                        $convenios = $ctrlConvenio->listarTodos();
+                        foreach ($convenios as $convenio) {
                             ?>
                             <tr>
-                                <td><?php echo $funcionario->getId(); ?></td>
-                                <td><?php echo $funcionario->getFantasia(); ?></td>
-                                <td><?php echo $funcionario->getCnpj(); ?></td>
-                                <td><?php echo $funcionario->getRazaoSocial(); ?></td>
-                                <td><a href="../controller/preControllerEmpresa.php?acao=editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a></td>
+                                <td><?php echo $convenio->getId(); ?></td>
+                                <td><?php echo $convenio->getNome(); ?></td>
+                                <td><a href="FrmConvenio.php?acao=editar&id=<?php echo $convenio->getId(); ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar</a></td>
                             </tr>    
                             <?php
                         }

@@ -29,7 +29,7 @@
         <!-- Static navbar -->
         <?php
         include_once 'menu.php';
-        include_once '../controller/ControllerEpresa.php';
+        include_once '../controller/ControllerEmpresa.php';
 
         $ctrlEmpresa = new ControllerEmpresa();
 
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <input type="hidden" name="acao" value="<?php echo $acao; ?>">
                             <label for="id">Id</label>                            
-                            <input type="text" name="id" id="id" class="form-control" value="<?php echo $empresa->getId() ?>" >
+                            <input type="text" name="id" id="id" class="form-control" value="<?php echo $empresa->getId() ?>" placeholder="ID" >
                         </div>
                         <div class="form-group">
                             <label for="fantasia">Nome Fantasia</label>
