@@ -102,11 +102,11 @@
                                         <input type="submit" class="btn btn-default" value="Adicionar Convenio">
                                     </form>
                                     <hr>
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-condensed">
                                         <tr>
-                                            <th>Id Convenio/Empresa</th>
+                                            <th width="100px" class="text-center">Id Conv./Emp.</th>
                                             <th>Convenio</th>
-                                            <th>Remover</th>
+                                            <th width="100px" class="text-center">Remover</th>
                                         </tr>
                                         <?php
                                         $ctrlEmpConv = new ControllerEmpresaConvenio();

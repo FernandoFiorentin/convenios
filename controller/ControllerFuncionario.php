@@ -1,6 +1,7 @@
 <?php
 include_once '../model/Funcionario.php';
 include_once '../model/FuncionarioDao.php';
+include_once '../model/Filtro.php';
 
 class ControllerFuncionario {
     private $funcionarioDao;
@@ -27,6 +28,10 @@ class ControllerFuncionario {
 
     public function listarTodos() {
         return $this->funcionarioDao->listarTodos();
+    }
+    
+    public function buscarComFiltro($filtros) {
+      return $this->funcionarioDao->buscarComFiltro($filtros);  
     }
 }
 ?>

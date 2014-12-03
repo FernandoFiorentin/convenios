@@ -36,11 +36,19 @@
             <button class="btn btn-default" onclick="window.location.href = 'Relatorios.php?tipo_relatorio=<?php echo TipoRelatorio::Funcionarios; ?>'"> Relatorio Funcionarios Ordem Alfabetica</button>
             <button class="btn btn-default" onclick="window.location.href = 'Relatorios.php?tipo_relatorio=<?php echo TipoRelatorio::FuncionariosPorEmpresa; ?>'"> Relatorio Funcionarios Por Empresa</button>
             <button class="btn btn-default" onclick="window.location.href = 'Relatorios.php?tipo_relatorio=<?php echo TipoRelatorio::FuncionariosPorConvenio; ?>'"> Relatorio Funcionarios Por Convenio</button>
-<hr>
+            <hr>
             <?php
+            $tipoRelatorio = null;
+            
             if (isset($_GET['tipo_relatorio'])) {
                 $tipoRelatorio = $_GET['tipo_relatorio'];
-
+            }
+            
+           // if (isset($_Post['tipo_relatorio'])) {
+             //   $tipoRelatorio = $_POST['tipo_relatorio'];
+           // }
+            
+            if ($tipoRelatorio) {
                 if ($tipoRelatorio == TipoRelatorio::Funcionarios) {
                     include_once 'RelatorioFuncionarios.php';
                 } elseif ($tipoRelatorio == TipoRelatorio::FuncionariosPorEmpresa) {

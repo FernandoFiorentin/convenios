@@ -2,6 +2,7 @@
 
 include_once 'Dao.php';
 include_once 'Funcionario.php';
+include_once 'Filtro.php';
 
 class FuncionarioDao extends Dao {
 
@@ -29,6 +30,49 @@ class FuncionarioDao extends Dao {
             return $funcionario;
         } catch (Exception $ex) {
             throw new Exception('erro ao buscar funcionario ' . $ex->getMessage());
+        }
+    }
+
+    public function buscarComFiltro($filtros) {
+        try {
+            $sql = 'select idfuncionario, nome, email, telefone, idempresa
+                        from funcionario where 1=1';
+            
+            foreach ($filtros as $filtro) {
+                if ($filtro->getOperador() == 'like') {
+                    $sql .= ' and ' . $filtro->getCampo() . ' like "%' . $filtro->getValor() . '%"';
+                } else {
+                    $sql .= ' and ' . $filtro->getCampo() . ' ' . $filtro->getOperador() . ' :' . $filtro->getCampo();
+                }
+            }
+
+            $sql.= ' order by nome';
+
+            //var_dump($sql);
+
+            $stmt = $this->con->prepare($sql);
+            foreach ($filtros as $filtro) {
+                if ($filtro->getOperador() != 'like') {
+                    $stmt->bindValue(':' . $filtro->getCampo(), $filtro->getValor());
+                }
+            }
+
+            $stmt->execute();
+
+            $funcionarios = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $funcionario = new Funcionario();
+                $funcionario->setId($row['idfuncionario']);
+                $funcionario->setNome($row['nome']);
+                $funcionario->setEmail($row['email']);
+                $funcionario->setTelefone($row['telefone']);
+                $funcionario->setIdEmpresa($row['idempresa']);
+                $funcionarios[] = $funcionario;
+            }
+
+            return $funcionarios;
+        } catch (Exception $ex) {
+            throw new Exception('erro ao buscar funcionarios com filtro ' . $ex->getMessage());
         }
     }
 
@@ -71,7 +115,7 @@ class FuncionarioDao extends Dao {
             return true;
         } catch (Exception $ex) {
             $this->con->rollback();
-            
+
             throw new Exception('Erro ao editar de funcionario: ' . $ex->getMessage());
         }
     }
