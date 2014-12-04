@@ -26,7 +26,7 @@ if ($arquivoAtual == '/convenios/view/FrmEmpresa.php') {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Convenios</a>
+            <a class="navbar-brand" href="home.php">Convenios</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
