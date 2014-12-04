@@ -32,7 +32,50 @@
         ?>
 
         <div class="container">
-            Convenios          
+            <div class="jumbotron">
+                <h3>FTEC - Projeto de Sistemas para WEB</h3>
+
+                <p>
+                    Trabalho: Convênios <br>
+                    Dupla: Carlos e Fernando<br>
+                </p>
+                <p>
+                <ol>
+                    <li>Cadastros
+                        <ul>
+                            <li>- Empresas (nome fantasia, CNPJ e razão social).</li>
+                            <li>- Funcionários (nome, e-mail, telefone e empresa).</li>
+                            <li>- Convênios (nome).</li>
+                            <li>- Empresa_convenio(idempresa, idconvenio)</li>
+                        </ul>
+                    </li>
+
+                    <li>Relatorios
+                        <ul>
+                            <li>Relatório de funcionários por ordem alfabética (fantasia):
+                                <ul>
+                                    <li> Mostrar nome, e-mail, telefone e clube de todos os funcionários com possibilidade de filtro (busca) pelos 4 campos;</li>
+                                </ul>
+                            </li>
+
+                            <li>Relatório de funcionários por empresa:
+                                <ul>
+                                    <li> Construir uma visualização onde exiba o nome fantasia da empresa e abaixo seus funcionários;</li>
+                                    <li> O relatório só deve mostrar a próxima empresa após escrever o nome de todos os funcionários da empresa em exibição;</li>
+                                </ul>
+                            </li>
+
+                            <li>Relatório de funcionários por convênio:
+                                <ul>
+                                    <li> Filtrar o convênio e mostrar nome e empresa dos funcionários resultantes da seleção;</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                </p>               
+
+            </div>        
         </div> <!-- /container -->
 
         <script src="../js/jquery.min.js"></script>

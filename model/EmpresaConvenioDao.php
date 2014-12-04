@@ -65,11 +65,9 @@ class EmpresaConvenioDao extends Dao {
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':idconvenio', $idConvenio);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
+            
             $convenios = array();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
                 $empresaConvenio = new EmpresaConvenio();
                 $empresaConvenio->setId($row['id_empresa_convenio']);
                 $empresaConvenio->setIdEmpresa($row['idempresa']);

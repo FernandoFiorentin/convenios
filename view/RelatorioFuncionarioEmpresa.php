@@ -10,7 +10,7 @@ include_once '../model/Filtro.php';
     <div class="panel-heading">Relatorio Funcionarios por Empresa</div>
     <div class="panel-body">
         <table class="table ">
-            <tr class="active">
+            <tr class="info">
                 <th width="50px">ID</th>
                 <th width="300px">Fantasia</th>
                 <th>Funcionarios</th>
@@ -21,7 +21,7 @@ include_once '../model/Filtro.php';
             $empresas = $ctrlEmpresa->listarTodos();
             foreach ($empresas as $empresa) {
                 ?>
-                <tr class="success">
+                <tr class="active">
                     <td><?php echo $empresa->getId(); ?></td>
                     <td><?php echo $empresa->getFantasia(); ?></td>
                     <td></td>

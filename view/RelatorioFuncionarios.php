@@ -66,7 +66,7 @@ if (isset($_POST['acao']) and $_POST['acao'] == 'filtrar') {
         <!-- Fim Painel Filtros -->
 
         <table class="table table-bordered table-striped">
-            <tr>
+            <tr class="info">
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefone</th>
