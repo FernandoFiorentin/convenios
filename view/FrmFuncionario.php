@@ -90,7 +90,7 @@
                         </div>
                         <button type="button" class="btn btn-default" onclick="window.location.href = 'FrmFuncionario.php'">Novo</button>
                         <button type="submit" class="btn btn-default">Salvar</button>
-                        <button type="submit" class="btn btn-default">Excluir</button>
+                        <button type="button" class="btn btn-default" onclick="window.location.href = '../controller/preControllerFuncionario.php?acao=excluir&id=<?php echo $funcionario->getId() ?>'">Excluir</button>
                     </form>  
                 </div>
             </div>    
